@@ -12,13 +12,15 @@ dotenv.config();
 
 // our proxy file
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "http://localhost:5174",
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
 };
 
 // our port
 const Port = 5000;
+
+// middleWare
 app.use(express.json());
 
 app.use(cors(corsOptions));
