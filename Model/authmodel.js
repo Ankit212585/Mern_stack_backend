@@ -28,15 +28,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // JWT Token
-userSchema.method.generateToken = async function () {
+userSchema.methods.generateToken = async function () {
   try {
     return JWT.sign(
       {
         userId: this._id.toString(),
-        email: this.email,
-        isAdmin: this.isAdmin,
+        Email: this.Email,
       },
-      process.env.JWT_TOKEN,
+      process.env.JWT_SECRET,
       {
         expiresIn: "30d",
       }
