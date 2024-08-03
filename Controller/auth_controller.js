@@ -17,20 +17,23 @@ const register = async (req, res) => {
     // hash password
     // const hash_password = await bcrypt.hash(password, 10);
 
-    // const token = User.generateToken();
-
     const userCreated = await User.create({
       username,
       email,
       Phone_Number,
       password,
     });
+    console.log({
+      userCreated,
+      token: await userCreated.generateToken(),
+      userId: userCreated._id.toString(),
+    });
 
     res.status(201).json({
       msg: "Registration successful",
       userCreated,
-      // token,
-      // userId: userCreated._id.toString(),
+      token: await userCreated.generateToken(),
+      userId: userCreated._id.toString(),
     });
   } catch (err) {
     console.log(err);
@@ -54,8 +57,15 @@ const login = async (req, res) => {
 
     // const user = await bcrypt.compare(password, userExist.password);
     if (userExist) {
+      console.log({
+        userExist,
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString(),
+      });
       res.status(201).json({
         msg: "Login successful",
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString(),
       });
     } else {
       res.status(401).json("server error");
