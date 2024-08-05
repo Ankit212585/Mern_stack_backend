@@ -1,5 +1,5 @@
 // const bcrypt = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 const User = require("../Model/authmodel");
 
 // This is our registration logic
@@ -80,7 +80,9 @@ const login = async (req, res) => {
 
 const user = async (req, res) => {
   try {
-    res.status(200).json("hello user");
+    const userData = req.user;
+    console.log(userData);
+    res.status(200).json(userData);
   } catch (err) {
     console.log(`error form the user route ${err}`);
   }

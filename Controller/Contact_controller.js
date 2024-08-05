@@ -6,9 +6,9 @@ const contactForm = async (req, res) => {
     const contactData = await Contact.create(response);
     return res
       .status(200)
-      .json({ message: "message sand successfully", contactData });
+      .json({ message: `message sand successfully ${contactData}` });
   } catch (err) {
-    console.log(err);
+    console.log(`something went wrong can't sand the message ${err}`);
   }
 };
 
