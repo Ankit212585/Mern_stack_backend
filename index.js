@@ -4,7 +4,7 @@ const authRouter = require("./Router/auth");
 const dotenv = require("dotenv");
 const connectdb = require("./utils/db");
 const contactRouter = require("./Router/contactRouter");
-const errorMiddleware = require("./middleware/error_middleware");
+// const errorMiddleware = require("./middleware/error_middleware");
 const cors = require("cors");
 
 // dot net logic
@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 app.use("/api/auth", authRouter);
 app.use("/api/form", contactRouter);
 
-app.use(errorMiddleware);
+// app.use(errorMiddleware);
 
 // our connection
 connectdb().then(() => {

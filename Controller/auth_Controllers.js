@@ -1,56 +1,58 @@
-const User = require("../Model/authmodel");
-const bcrypt = require("bcryptjs");
+// This all data is dummy data to practic myself
 
-const auth = async (req, res) => {
-  try {
-    const { username, email, phoneNumber, password, isAdmin } =
-      req.body;
+// const User = require("../Model/authmodel");
+// const bcrypt = require("bcryptjs");
 
-    // Check if all required fields are provided and not empty
-    if (!username || !email || !phoneNumber || !password) {
-      return res
-        .status(400)
-        .json({ message: "All fields are required" });
-    }
+// const auth = async (req, res) => {
+//   try {
+//     const { username, email, phoneNumber, password, isAdmin } =
+//       req.body;
 
-    // Check if user with the same email or phone number already exists
-    const existingUser = await User.findOne({
-      $or: [{ email }, { phoneNumber }],
-    });
-    if (existingUser) {
-      return res.status(409).json({
-        message:
-          "User with this email or phone number already exists",
-      });
-    }
+//     // Check if all required fields are provided and not empty
+//     if (!username || !email || !phoneNumber || !password) {
+//       return res
+//         .status(400)
+//         .json({ message: "All fields are required" });
+//     }
 
-    // Hash the password
+//     // Check if user with the same email or phone number already exists
+//     const existingUser = await User.findOne({
+//       $or: [{ email }, { phoneNumber }],
+//     });
+//     if (existingUser) {
+//       return res.status(409).json({
+//         message:
+//           "User with this email or phone number already exists",
+//       });
+//     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+//     // Hash the password
 
-    // Create new user
-    const newUser = await User.create({
-      username,
-      email,
-      phoneNumber,
-      password: hashedPassword,
-      isAdmin: isAdmin || false, // Use provided isAdmin or default to false
-    });
+//     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Remove password from the response
-    const userResponse = newUser.toObject();
-    delete userResponse.password;
+//     // Create new user
+//     const newUser = await User.create({
+//       username,
+//       email,
+//       phoneNumber,
+//       password: hashedPassword,
+//       isAdmin: isAdmin || false, // Use provided isAdmin or default to false
+//     });
 
-    return res.status(201).json({
-      message: "User created successfully",
-      user: userResponse,
-    });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ message: "Internal server error", error: err.message });
-  }
-};
+//     // Remove password from the response
+//     const userResponse = newUser.toObject();
+//     delete userResponse.password;
 
-module.exports = auth;
+//     return res.status(201).json({
+//       message: "User created successfully",
+//       user: userResponse,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res
+//       .status(500)
+//       .json({ message: "Internal server error", error: err.message });
+//   }
+// };
+
+// module.exports = auth;

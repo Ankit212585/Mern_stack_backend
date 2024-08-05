@@ -76,4 +76,14 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login, register }; //remember plzz destructure this function
+// Get user data - User Logic
+
+const user = async (req, res) => {
+  try {
+    res.status(200).json("hello user");
+  } catch (err) {
+    console.log(`error form the user route ${err}`);
+  }
+};
+
+module.exports = { login, register, user }; //remember plzz destructure this function
