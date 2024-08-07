@@ -11,6 +11,18 @@ const allUsers = async (req, res) => {
   }
 };
 
+// Delete Users
+
+const DeleteUsers = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await User.deleteOne({ _id: id });
+    res.status(200).json("User Delete successfully");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // admin all contacts
 
 const allContact = async (req, res) => {
@@ -21,4 +33,4 @@ const allContact = async (req, res) => {
     console.log("something went wrong");
   }
 };
-module.exports = { allUsers, allContact };
+module.exports = { allUsers, allContact, DeleteUsers };
