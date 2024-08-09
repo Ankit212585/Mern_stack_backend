@@ -13,7 +13,7 @@ dotenv.config();
 
 // our proxy file
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "https://mern-stack-backend-peib.vercel.app/",
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
 };
