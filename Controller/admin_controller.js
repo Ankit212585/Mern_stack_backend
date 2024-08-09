@@ -33,4 +33,39 @@ const allContact = async (req, res) => {
     console.log("something went wrong");
   }
 };
-module.exports = { allUsers, allContact, DeleteUsers };
+
+// Edit ourUser
+
+const getUserbyId = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateUserData = req.body;
+    const updateUser = await User.updateOne(
+      { _id: id },
+      { $set: updateUserData }
+    );
+    console.log(updateUser);
+    res.status(200).json(updateUser);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Delete admin contacts
+const deleteContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Contact.deleteOne({ _id: id });
+    res.status(200).json("Contact Delete successfully");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = {
+  allUsers,
+  allContact,
+  DeleteUsers,
+  deleteContact,
+  getUserbyId,
+};
